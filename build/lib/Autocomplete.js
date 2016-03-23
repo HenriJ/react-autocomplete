@@ -87,10 +87,12 @@ var Autocomplete = React.createClass({
 
   handleKeyDown: function handleKeyDown(event) {
     if (this.keyDownHandlers[event.key]) this.keyDownHandlers[event.key].call(this, event);else {
+      var _this = this;
+      var selectionStart = this.refs.input.selectionStart;
       this.setState({
         highlightedIndex: null,
         isOpen: true
-      });
+      }, function() { _this.refs.input.selectionStart = selectionStart; });
     }
   },
 
